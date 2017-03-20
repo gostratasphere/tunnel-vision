@@ -1,0 +1,22 @@
+
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>Get There</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content text-center padding>
+  <h2 >Where do you want to go?</h2>
+  <ion-searchbar
+    
+    [showCancelButton]=true
+    [placeholder]='Destination'
+
+    (ionInput)="onInput($event)"
+    (ionCancel)="onCancel($event)">
+  </ion-searchbar>
+  <button ion-button full (click)='startTrip()'>Go!</button>
+
+</ion-content>
+

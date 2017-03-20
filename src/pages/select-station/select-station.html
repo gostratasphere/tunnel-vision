@@ -1,0 +1,24 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Nearest Station</ion-title>
+  </ion-navbar>
+  <ion-item no-lines>
+  	<ion-label> Use My Location</ion-label>
+  	<ion-toggle checked="true"></ion-toggle>
+	</ion-item>
+
+</ion-header>
+
+
+<ion-content>
+	
+	
+	<ion-list>
+	  <button ion-item *ngFor="let station of stations" (click)='stationSelected(station)'>
+	    {{ station.stationInfo.Name }}
+	  </button>
+	</ion-list>
+
+</ion-content>

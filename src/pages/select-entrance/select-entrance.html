@@ -1,0 +1,46 @@
+<!--
+  Generated template for the SelectEntrance page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Select Entrance</ion-title>
+  </ion-navbar>
+  <button ion-button full>Go There</button>
+
+</ion-header>
+
+
+<ion-content padding>
+
+
+<ion-card>
+	<ion-card-header>
+	  {{station.stationInfo.Name}} Station
+    
+	</ion-card-header>
+	<div #map id="map" style="height:300px;"></div>
+   <ion-list radio-group>
+
+    <ion-item *ngFor="let entrance of entrances">
+      <ion-label>{{entrance.Name}}</ion-label>
+      <ion-radio value={{entrance.ID}}></ion-radio>
+    </ion-item>
+
+  </ion-list>
+</ion-card>
+
+	
+
+ 
+
+  
+</ion-content>
+
+
