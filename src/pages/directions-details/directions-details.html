@@ -1,0 +1,24 @@
+<!--
+  Generated template for the DirectionsDetails page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{leg}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<div id='direct'>
+		<span *ngFor="let step of directions">
+			<p style='font-size:.6em'>{{step.distance.text}}, ( {{step.duration.text}} )</p>
+			<p id={{step.encoded_lat_lngs}}></p>
+		</span>
+
+	</div>
+</ion-content>

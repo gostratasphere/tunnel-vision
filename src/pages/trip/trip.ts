@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
-import { Geolocation } from 'ionic-native';
+import { Geolocation } from '@ionic-native/Geolocation';
 import { SelectEntrancePage } from '../select-entrance/select-entrance';
 import * as Metro from 'wmata-metro-js';
 
@@ -10,14 +10,15 @@ console.log(client);
 
 @Component({
   selector: 'page-trip',
-  templateUrl: 'trip.html'
+  templateUrl: 'trip.html', 
+  providers: [Geolocation]
 })
 
 export class TripPage {
   position: any;
   closestStation:any;
 
-  constructor(public navCtrl: NavController) {
+  constructor(public geolocation: Geolocation, public navCtrl: NavController) {
     this.position;
     this.closestStation = {};
   }
@@ -37,7 +38,7 @@ export class TripPage {
   ionViewDidLoad() {
     let that = this;
     console.log(typeof Metro);
-    Geolocation.getCurrentPosition({
+    this.geolocation.getCurrentPosition({
       maximumAge: 15000,
       timeout: 30000,
       enableHighAccuracy: true

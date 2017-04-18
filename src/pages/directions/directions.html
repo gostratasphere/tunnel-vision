@@ -14,5 +14,28 @@
 
 
 <ion-content padding>
+<ion-card>
+	<ion-card-header>
+		{{startRoute.start_address}}
+		<br />
+		to
+		<br />
+		{{startRoute.end_address}}
+	</ion-card-header>
+	<ion-list>
+		<button ion-item (click)='startRouteSelected()'>
+			<ion-icon name="walk" item-left></ion-icon>
+      Origin To Station
+		</button>
+		<button ion-item (click)='midRouteSelected()'>
+			<ion-icon name="train" item-left></ion-icon>
+      Through Metro
+		</button>
+		<button ion-item (click)='endRouteSelected()'>
+			<ion-icon name="walk" item-left></ion-icon>
+      Station to Destination
+		</button>
+	</ion-list>
+</ion-card>
 
 </ion-content>
