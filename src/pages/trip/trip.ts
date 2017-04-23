@@ -5,6 +5,8 @@ import { Geolocation } from '@ionic-native/Geolocation';
 import { SelectEntrancePage } from '../select-entrance/select-entrance';
 import * as Metro from 'wmata-metro-js';
 
+declare var google;
+
 let client = new Metro('bfdece0152e44c41a14915bdb7506b8b');
 console.log(client);
 
@@ -27,16 +29,27 @@ export class TripPage {
 
   
   onInput(o){
-  	let props = [];
-  	for (let i in o) {
-  		props.push(i);
-  	}
-  	console.log(props);
-  	console.log(o.target, o.currentTarget);
+    console.log(o.target.value);
   }
+
+  initAutoComplete() {
+    let searchBounds = new google.maps.LatLngBounds({lat:38.772829, lng:-77.190595}, {lat:39.016469, lng:-76.902073})
+    let input = document.getElementById('searchInput');
+    console.dir(google.maps);
+    let autocomplete = new google.maps.places.Autocomplete(input, {bounds: searchBounds});
+    console.log('ran initautocomplete');
+    //autocomplete.addListener('place_changed', fillInAddress);
+
+    
+  }
+
+
 
   ionViewDidLoad() {
     let that = this;
+
+    this.initAutoComplete();
+    
     console.log(typeof Metro);
     this.geolocation.getCurrentPosition({
       maximumAge: 15000,

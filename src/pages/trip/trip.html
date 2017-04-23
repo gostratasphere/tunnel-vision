@@ -8,14 +8,9 @@
 
 <ion-content text-center padding>
   <h2 >Where do you want to go?</h2>
-  <ion-searchbar
-    
-    [showCancelButton]=true
-    [placeholder]='Destination'
-
-    (ionInput)="onInput($event)"
-    (ionCancel)="onCancel($event)">
-  </ion-searchbar>
+  <input class='searchPlace' id='searchInput'
+    placeholder='Destination'
+    type='text'>
   <button ion-button full (click)='startTrip()'>Go!</button>
 
 </ion-content>
