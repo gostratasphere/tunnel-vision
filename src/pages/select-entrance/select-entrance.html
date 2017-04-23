@@ -29,6 +29,7 @@
    <ion-list radio-group>
 
     <ion-item *ngFor="let entrance of entrances">
+      <img src="{{imgIcon(entrance.Name)}}" style="width:20px" item-left/> 
       <ion-label>{{entrance.Name}}</ion-label>
       <ion-radio value={{entrance.ID}}></ion-radio>
     </ion-item>

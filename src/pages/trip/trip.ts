@@ -17,12 +17,16 @@ console.log(client);
 })
 
 export class TripPage {
-  position: any;
+  position:any;
   closestStation:any;
+  destinationStation:any;
+  destination:any;
 
   constructor(public geolocation: Geolocation, public navCtrl: NavController) {
     this.position;
     this.closestStation = {};
+    this.destination;
+    this.destinationStation = {};
   }
 
   pushPage = SelectEntrancePage;
@@ -38,10 +42,36 @@ export class TripPage {
     console.dir(google.maps);
     let autocomplete = new google.maps.places.Autocomplete(input, {bounds: searchBounds});
     console.log('ran initautocomplete');
-    //autocomplete.addListener('place_changed', fillInAddress);
+    autocomplete.addListener('place_changed', setDestinationAddress);
 
+    function setDestinationAddress(){
+      let that = this;
+      let destStationCode, destEntrances = [], destStationInfo;
+      console.log(autocomplete.getPlace());
+      this.destination = autocomplete.getPlace();
+      console.log(this.destination.geometry.location.lat());
+      client.getRailStationEntrances({lat: this.destination.geometry.location.lat(), lon: this.destination.geometry.location.lng()}, '2000', function(err, res){
+        console.log(res[0]);
+        destStationCode = res[0].StationCode1;
+        let reslen = res.length, c;
+        for (let i = 0; i < reslen; i++) {
+          c = res[i].StationCode1;
+          if (c == destStationCode) {
+            destEntrances.push(res[i]);
+          } else {
+            break;
+          }
+        }
+        console.log('station code: ' + destStationCode);
+        client.getRailStationInfo(destStationCode, function(err1, res1){
+            destStationInfo = res1;
+            that.destinationStation = {stationInfo: destStationInfo, entrances: destEntrances}
+        })
+      })
+    }
     
   }
+  
 
 
 
@@ -121,7 +151,7 @@ export class TripPage {
 
   startTrip() {
     if (this.position && this.closestStation.stationInfo){
-      this.navCtrl.push(SelectEntrancePage, {position: this.position, closestStation: this.closestStation});
+      this.navCtrl.push(SelectEntrancePage, {position: this.position, closestStation: this.closestStation, destination: this.destination, destinationStation: this.destinationStation || 'no destination station'});
     }
   }
 

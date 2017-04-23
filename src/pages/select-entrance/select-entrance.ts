@@ -33,7 +33,7 @@ export class SelectEntrancePage {
     
     let map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: this.station.latitude || 38.8977, lng: this.station.longitude || 77.0365},
-      zoom: 17,
+      zoom: 15,
       disableDefaultUI: true
     });
 
@@ -48,20 +48,33 @@ export class SelectEntrancePage {
 
 
     person.setPosition(pos);
-
-
     markers.push(person);
+
     let arrLength = this.entrances.length
+    let eMarker;
+    let re = /elevator/i;
     for (let i = 0; i < arrLength; i++) {
-      let eMarker = new google.maps.Marker({
-        map: map,
-        position: {
-          lat: this.entrances[i].Lat,
-          lng: this.entrances[i].Lon
-        },
-        label: String(i+1),
-        icon: pinSymbol('blue')
-      });
+      console.log('check regular expression::: ' + re.test(this.entrances[i].Name));
+      if (re.test(this.entrances[i].Name)) {
+        eMarker = new google.maps.Marker({
+          map: map,
+          position: {
+            lat: this.entrances[i].Lat,
+            lng: this.entrances[i].Lon
+          },
+          icon: elevatorIcon()
+        });
+      } else {
+        eMarker = new google.maps.Marker({
+          map: map,
+          position: {
+            lat: this.entrances[i].Lat,
+            lng: this.entrances[i].Lon
+          },
+          icon: escalatorIcon(),
+          size: new google.maps.Size(20, 30)
+        });
+      }
       markers.push(eMarker);
     }
     let bounds = new google.maps.LatLngBounds();
@@ -78,7 +91,7 @@ export class SelectEntrancePage {
 
     function calcRoute(pos, markers){
       let directionsService = new google.maps.DirectionsService();
-      let directionsDisplay = new google.maps.DirectionsRenderer();
+      let directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers:true});
       
       directionsDisplay.setMap(map);
 
@@ -103,16 +116,28 @@ export class SelectEntrancePage {
 
 
 
-    function pinSymbol(color) {
+    function escalatorIcon() {
       return {
-        path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z',
-        fillColor: color,
-        fillOpacity: 1,
-        strokeColor: '#000',
-        strokeWeight: 2,
-        scale: 1
-      };
-    }   
+        url: "assets/img/escalator.png",
+        origin: new google.maps.Point(0, 0), 
+        scaledSize: new google.maps.Size(25, 25)
+      }
+    }  
+    function elevatorIcon() {
+      return {
+        url: "assets/img/elevator.png",
+        origin: new google.maps.Point(0, 0), 
+        scaledSize: new google.maps.Size(25, 25)
+      }
+    }
+  }
+  imgIcon(entranceName){
+    let re=/elevator/ig;
+    if (re.test(entranceName)) {
+      return "assets/img/elevator.png";
+    } else {
+      return "assets/img/escalator.png";
+    }
   }
 
   entranceButtonpressed(): void {
