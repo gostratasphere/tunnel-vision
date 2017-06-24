@@ -4,7 +4,6 @@ import { NavController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/Geolocation';
 import { SelectEntrancePage } from '../select-entrance/select-entrance';
 import * as Metro from 'wmata-metro-js';
-import * as $ from 'jquery'
 
 declare var google;
 

@@ -1,11 +1,5 @@
 page-trip {
-    @mixin vertical-align {
-    position: relative;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    }
+    
 
 	#searchInput {
     	background-color: #fff;
@@ -32,16 +26,13 @@ page-trip {
 
     }
 
-    .container {
-      background: tomato;
-      width: 600px;
-      height: 300px;
-      text-align: center;
+    ion-content {
+        text-align: center
     }
 
     .box {
-      display: inline-block;
-      @include vertical-align();
+      /*display: inline-block;*/
+      margin-top: 100px;
     }
 
 }
