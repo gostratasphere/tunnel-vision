@@ -13,16 +13,22 @@ declare var google;
 
 export class SelectEntrancePage {
 	station: any;
-	//@ViewChild('map') mapElement: Elementref;
 	map: any;
 	position: any;
   entrances: any;
   route: any;
+  destination: any;
+  destinationStation: any;
+  destinationRoute: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   	this.station = navParams.get('closestStation');
     this.entrances = this.station.entrances;
   	this.position = navParams.get('position');
+    this.destination = navParams.get('destination');
+    console.log('passing over destingation: ' + this.destination);
+    this.destinationStation = navParams.get('destinationStation');
+   
   }
 
 
@@ -147,7 +153,7 @@ export class SelectEntrancePage {
 
   entranceSelected(): void {
       console.log(this.route);
-      this.navCtrl.push(DirectionsPage, {route: this.route});
+      this.navCtrl.push(DirectionsPage, {route: this.route, destination:this.destination, destinationStation:this.destinationStation});
   }
 
   ngAfterViewInit() {
@@ -157,6 +163,7 @@ export class SelectEntrancePage {
 
   ionViewDidLoad() {
 		console.log(this.station)
+
 	}
 
   

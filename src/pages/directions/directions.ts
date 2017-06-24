@@ -15,8 +15,11 @@ import { DirectionsDetailsPage } from '../directions-details/directions-details'
 })
 export class DirectionsPage {
 	startRoute: any;
+  destination: any;
+  
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   	this.startRoute = navParams.get('route').routes[0].legs[0];
+    this.destination = navParams.get('destination');
   }
 
   ionViewDidLoad() {

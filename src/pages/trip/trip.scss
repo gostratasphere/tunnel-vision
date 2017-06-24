@@ -1,20 +1,47 @@
 page-trip {
-	#searchInput {
-		background-color: #fff;
-    border-radius: 2px;
-    border: 1px solid black;
-    box-sizing: border-box;
-    font-family: Roboto;
-    font-size: 15px;
-    font-weight: 300;
-    height: 40px;
-    margin-left: 0px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    outline: none;
-    padding: 0 11px 0 13px;
-    text-overflow: ellipsis;
-    width: 100%;
+    @mixin vertical-align {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    }
 
+	#searchInput {
+    	background-color: #fff;
+        border-radius: 2px;
+        border: 1px solid black;
+        box-sizing: border-box;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        height: 40px;
+        margin-left: 0px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        outline: none;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 100%;
 	}
+
+    .min-butt {
+          background-color: #fff;
+          width:50px;
+          height:120px;
+
+    }
+
+    .container {
+      background: tomato;
+      width: 600px;
+      height: 300px;
+      text-align: center;
+    }
+
+    .box {
+      display: inline-block;
+      @include vertical-align();
+    }
+
 }

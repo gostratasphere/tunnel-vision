@@ -5,6 +5,8 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { Stations } from "./../../assets/javascript/stations.ts";
 //console.log(StationList);
 
+declare var google;
+
 @Component({
   selector: 'page-select-station',
   templateUrl: 'select-station.html',

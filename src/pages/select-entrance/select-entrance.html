@@ -20,14 +20,15 @@
 <ion-content padding>
 
 
-<ion-card>
-	<ion-card-header>
-	  {{station.stationInfo.Name}} Station
-    
-	</ion-card-header>
-	<div #map id="map" style="height:300px;"></div>
-   <ion-list radio-group>
 
+	  <h4>{{station.stationInfo.Name}} Station</h4>
+    
+
+	<div #map id="map" style="height:300px"></div>
+   <ion-list radio-group>
+   <div style="text-align: center; padding-top: 10px">
+    <h4>Choose Your Entrance</h4>
+  </div>
     <ion-item *ngFor="let entrance of entrances">
       <img src="{{imgIcon(entrance.Name)}}" style="width:20px" item-left/> 
       <ion-label>{{entrance.Name}}</ion-label>
@@ -35,7 +36,7 @@
     </ion-item>
 
   </ion-list>
-</ion-card>
+
 </ion-content>
 
 <ion-footer>

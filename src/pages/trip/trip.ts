@@ -4,6 +4,7 @@ import { NavController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/Geolocation';
 import { SelectEntrancePage } from '../select-entrance/select-entrance';
 import * as Metro from 'wmata-metro-js';
+import * as $ from 'jquery'
 
 declare var google;
 
@@ -21,6 +22,7 @@ export class TripPage {
   closestStation:any;
   destinationStation:any;
   destination:any;
+  connector:boolean = false; 
 
   constructor(public geolocation: Geolocation, public navCtrl: NavController) {
     this.position;
@@ -30,7 +32,6 @@ export class TripPage {
   }
 
   pushPage = SelectEntrancePage;
-
   
   onInput(o){
     console.log(o.target.value);
@@ -42,15 +43,31 @@ export class TripPage {
     console.dir(google.maps);
     let autocomplete = new google.maps.places.Autocomplete(input, {bounds: searchBounds});
     console.log('ran initautocomplete');
+    autocomplete.addListener('place_changed', setConnected);
     autocomplete.addListener('place_changed', setDestinationAddress);
+    let that = this;
 
+    function setConnected() {
+      let name = autocomplete.getPlace().name;
+      if (name === "Union Station" || name === "Rosslyn Station" ){
+        document.getElementById("travelOptions").removeAttribute('hidden')
+      } else {
+        document.getElementById("travelOptions").setAttribute('hidden', 'true')
+      }
+      console.log(that.connector);
+    }
     function setDestinationAddress(){
-      let that = this;
+      
       let destStationCode, destEntrances = [], destStationInfo;
       console.log(autocomplete.getPlace());
-      this.destination = autocomplete.getPlace();
-      console.log(this.destination.geometry.location.lat());
-      client.getRailStationEntrances({lat: this.destination.geometry.location.lat(), lon: this.destination.geometry.location.lng()}, '2000', function(err, res){
+      that.destination = autocomplete.getPlace();
+      console.log("here's your destination: \n")
+      console.log(that.destination);
+      console.log(that.destination.name);
+
+
+      console.log(that.destination.geometry.location.lat());
+      client.getRailStationEntrances({lat: that.destination.geometry.location.lat(), lon: that.destination.geometry.location.lng()}, '2000', function(err, res){
         console.log(res[0]);
         destStationCode = res[0].StationCode1;
         let reslen = res.length, c;
@@ -146,13 +163,28 @@ export class TripPage {
       })
       
       
+    }).catch((error) => {
+      console.log('Error getting location', error);
     });
   }
 
+  resetInput() {
+    let searchInput = <HTMLInputElement>document.getElementById('searchInput');
+   
+    searchInput.value = '';
+    searchInput.focus();
+    this.destination = false;
+    this.destinationStation = false;
+    document.getElementById("travelOptions").setAttribute('hidden', 'true')
+
+    
+    console.log(searchInput.getAttribute('value'));
+    
+  }
   startTrip() {
-    if (this.position && this.closestStation.stationInfo){
+    if (this.position && this.closestStation.stationInfo && this.destination && this.destinationStation){
       this.navCtrl.push(SelectEntrancePage, {position: this.position, closestStation: this.closestStation, destination: this.destination, destinationStation: this.destinationStation || 'no destination station'});
-    }
+    } else alert("Maybe you forgot to enter a place or maybe you've got no place to go.")
   }
 
   onCancel(event){

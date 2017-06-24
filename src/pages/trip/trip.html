@@ -6,12 +6,29 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content text-center padding>
-  <h2 >Where do you want to go?</h2>
-  <input class='searchPlace' id='searchInput'
-    placeholder='Destination'
-    type='text'>
-  <button ion-button full (click)='startTrip()'>Go!</button>
+<ion-content style="vertical-align: middle" text-center padding>
+  
+  <div class='box'>
+    <h2 >Where do you want to go?</h2>
+    <div style="display:inline">
+      <input style="width:92%; margin-right:4px" class='searchPlace' id='searchInput'
+        placeholder='Destination'
+        type='text'>
+      <ion-icon name='close-circle' (click)='resetInput()'></ion-icon>
+    </div>
+
+
+
+
+    <div id="travelOptions" style="display: inline" hidden='true'>
+    <h4>Connecting to?</h4>
+      <button ion-button color="light">Airport</button>
+      <button ion-button color="light">Amtrak</button>
+    </div>
+
+    <button ion-button full (click)='startTrip()'>Go!</button>
+  </div>
+
 
 </ion-content>
 
