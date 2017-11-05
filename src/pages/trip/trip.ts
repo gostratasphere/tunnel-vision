@@ -48,7 +48,10 @@ export class TripPage {
 
     function setConnected() {
       let name = autocomplete.getPlace().name;
-      if (name === "Union Station" || name === "Rosslyn Station" ){
+      if (name === "Union Station" || // Should these be regular expressions to capture places that aren't stations?
+          name === "Rosslyn Station" ||
+          name === "Alexandria Station" ||
+          name === "L'Enfant Plaza Station" ){
         document.getElementById("travelOptions").removeAttribute('hidden')
       } else {
         document.getElementById("travelOptions").setAttribute('hidden', 'true')
@@ -88,10 +91,11 @@ export class TripPage {
     
   }
   
+  
 
 
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
     let that = this;
 
     this.initAutoComplete();

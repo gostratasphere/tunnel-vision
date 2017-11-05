@@ -1,4 +1,5 @@
 {
   "name": "Tunnel Vision",
-  "app_id": "36cb01e8"
+  "app_id": "36cb01e8",
+  "type": "ionic-angular"
 }

@@ -10,6 +10,7 @@ import { SelectStationPage } from '../pages/select-station/select-station';
 import { SelectEntrancePage } from '../pages/select-entrance/select-entrance';
 import { DirectionsPage } from '../pages/directions/directions';
 import { DirectionsDetailsPage } from '../pages/directions-details/directions-details';
+import { PlatformDetailsPage } from '../pages/platform-details/platform-details';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DirectionsDetailsPage } from '../pages/directions-details/directions-de
     SelectStationPage,
     SelectEntrancePage,
     DirectionsPage,
-    DirectionsDetailsPage
+    DirectionsDetailsPage,
+    PlatformDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,8 @@ import { DirectionsDetailsPage } from '../pages/directions-details/directions-de
     SelectStationPage,
     SelectEntrancePage,
     DirectionsPage,
-    DirectionsDetailsPage
+    DirectionsDetailsPage,
+    PlatformDetailsPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

@@ -17,25 +17,25 @@
 </ion-header>
 
 
-<ion-content padding>
-
-
-
-	  <h4>{{station.stationInfo.Name}} Station</h4>
+<ion-content>
+  <h4 id="stationNameWords">{{station.stationInfo.Name}} Station</h4>
+  <div id="stationNameBox"></div>
     
 
-	<div #map id="map" style="height:300px"></div>
-   <ion-list radio-group>
-   <div style="text-align: center; padding-top: 10px">
-    <h4>Choose Your Entrance</h4>
-  </div>
-    <ion-item *ngFor="let entrance of entrances">
-      <img src="{{imgIcon(entrance.Name)}}" style="width:20px" item-left/> 
-      <ion-label>{{entrance.Name}}</ion-label>
-      <ion-radio value={{entrance.ID}}></ion-radio>
-    </ion-item>
+	<div id="map"></div>
+  
+  <div id="listOfEntrances">
+    
+   
 
-  </ion-list>
+    <ion-list radio-group>
+      <ion-item *ngFor="let entrance of entrances">
+        <img src="{{imgIcon(entrance.Name)}}" style="width:20px" item-left/> 
+        <ion-label>{{entrance.Name}}</ion-label>
+        <ion-radio value={{entrance.ID}}></ion-radio>
+      </ion-item>
+    </ion-list>
+  </div>
 
 </ion-content>
 
