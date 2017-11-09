@@ -1,5 +1,8 @@
 {
   "name": "Tunnel Vision",
   "app_id": "36cb01e8",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }
