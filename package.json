@@ -52,5 +52,10 @@
       "locator": "ios"
     }
   ],
-  "description": "getThere: An Ionic project"
+  "description": "getThere: An Ionic project",
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-geolocation": {}
+    }
+  }
 }
